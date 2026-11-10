@@ -19,8 +19,9 @@ export async function signedVendorFile(path: string) {
 }
 
 export function downloadCsv(filename: string, rows: Record<string, unknown>[]) {
-  if (!rows.length) return;
-  const headers = Object.keys(rows[0]);
+  const first = rows[0];
+  if (!first) return;
+  const headers = Object.keys(first);
   const esc = (v: unknown) => {
     const s = v === null || v === undefined ? "" : Array.isArray(v) ? v.join("; ") : String(v);
     return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;

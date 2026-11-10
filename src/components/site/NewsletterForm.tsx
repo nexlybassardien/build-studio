@@ -10,7 +10,7 @@ export function NewsletterForm({ tone = "light" }: { tone?: "light" | "dark" }) 
   const submit = useServerFn(subscribeNewsletter);
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Partial<Record<"firstName" | "email", string>>>({});
   const [state, setState] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [message, setMessage] = useState("");
 
@@ -18,8 +18,8 @@ export function NewsletterForm({ tone = "light" }: { tone?: "light" | "dark" }) 
     e.preventDefault();
     const parsed = newsletterSchema.safeParse({ firstName, email });
     if (!parsed.success) {
-      const errs: Record<string, string> = {};
-      parsed.error.issues.forEach((i) => (errs[String(i.path[0])] = i.message));
+      const errs: Partial<Record<"firstName" | "email", string>> = {};
+      parsed.error.issues.forEach((i) => (errs[String(i.path[0]) as "firstName" | "email"] = i.message));
       setErrors(errs);
       return;
     }

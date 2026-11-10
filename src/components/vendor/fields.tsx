@@ -13,10 +13,10 @@ export function Field({
   htmlFor,
 }: {
   label: string;
-  error?: string;
-  optional?: boolean;
+  error?: string | undefined;
+  optional?: boolean | undefined;
   children: ReactNode;
-  htmlFor?: string;
+  htmlFor?: string | undefined;
 }) {
   return (
     <div>
@@ -29,12 +29,12 @@ export function Field({
   );
 }
 
-export function TextInput(props: InputHTMLAttributes<HTMLInputElement> & { invalid?: boolean }) {
+export function TextInput(props: InputHTMLAttributes<HTMLInputElement> & { invalid?: boolean | undefined }) {
   const { invalid, className, ...rest } = props;
   return <input {...rest} aria-invalid={invalid} className={cn(fieldClass, "h-13", className)} />;
 }
 
-export function TextArea(props: TextareaHTMLAttributes<HTMLTextAreaElement> & { invalid?: boolean }) {
+export function TextArea(props: TextareaHTMLAttributes<HTMLTextAreaElement> & { invalid?: boolean | undefined }) {
   const { invalid, className, ...rest } = props;
   return <textarea {...rest} aria-invalid={invalid} className={cn(fieldClass, "min-h-28 py-3", className)} />;
 }

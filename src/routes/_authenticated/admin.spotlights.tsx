@@ -38,7 +38,10 @@ function Spotlights() {
   };
 
   const add = async () => {
-    if (!form.brand_name.trim()) return toast.error("Brand name is required");
+    if (!form.brand_name.trim()) {
+      toast.error("Brand name is required");
+      return;
+    }
     setSaving(true);
     try {
       const logo_url = logo ? (await uploadMediaFile(logo, "spotlights")).url : null;

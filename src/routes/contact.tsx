@@ -30,12 +30,13 @@ export const Route = createFileRoute("/contact")({
 });
 
 const icons = [Sparkles, Store, Handshake, MessageCircle];
+type ContactKey = "name" | "email" | "enquiryType" | "message";
 
 function Contact() {
   const { data: settings } = useSuspenseQuery(settingsQuery);
   const send = useServerFn(submitContact);
   const [form, setForm] = useState({ name: "", email: "", enquiryType: "General enquiry" as (typeof ENQUIRY_TYPES)[number], message: "" });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Partial<Record<ContactKey, string>>>({});
   const [state, setState] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [errMsg, setErrMsg] = useState("");
 
@@ -43,8 +44,8 @@ function Contact() {
     e.preventDefault();
     const parsed = contactSchema.safeParse(form);
     if (!parsed.success) {
-      const errs: Record<string, string> = {};
-      parsed.error.issues.forEach((i) => (errs[String(i.path[0])] = i.message));
+      const errs: Partial<Record<ContactKey, string>> = {};
+      parsed.error.issues.forEach((i) => (errs[String(i.path[0]) as ContactKey] = i.message));
       setErrors(errs);
       return;
     }
@@ -79,7 +80,7 @@ function Contact() {
 
           <div className="mt-8 grid grid-cols-2 gap-3">
             {ENQUIRY_TYPES.map((t, i) => {
-              const Icon = icons[i];
+              const Icon = icons[i] ?? Sparkles;
               return (
                 <div key={t} className="rounded-3xl bg-card p-5 shadow-soft">
                   <Icon className="h-5 w-5 text-pink-deep" />

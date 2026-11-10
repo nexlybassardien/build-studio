@@ -4,12 +4,12 @@ import { Check, Copy, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { INSTAGRAM_URL, brandImages } from "@/lib/brand-media";
 
-type Search = { ref?: string; name?: string };
+type Search = { ref?: string | undefined; name?: string | undefined };
 
 export const Route = createFileRoute("/application-received")({
   validateSearch: (s: Record<string, unknown>): Search => ({
-    ref: typeof s.ref === "string" ? s.ref.slice(0, 20) : undefined,
-    name: typeof s.name === "string" ? s.name.slice(0, 150) : undefined,
+    ref: typeof s["ref"] === "string" ? s["ref"].slice(0, 20) : undefined,
+    name: typeof s["name"] === "string" ? s["name"].slice(0, 150) : undefined,
   }),
   head: () => ({
     meta: [

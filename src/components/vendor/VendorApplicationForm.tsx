@@ -47,6 +47,8 @@ type FormState = {
   agreedTerms: boolean;
 };
 
+type Errors = Partial<Record<keyof FormState, string>>;
+
 const initial: FormState = {
   businessName: "",
   contactPerson: "",
@@ -77,7 +79,7 @@ export function VendorApplicationForm() {
   const submit = useServerFn(submitVendorApplication);
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<FormState>(initial);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
   const [draftId, setDraftId] = useState("");
   const [logo, setLogo] = useState<UploadedFile[]>([]);
@@ -105,9 +107,9 @@ export function VendorApplicationForm() {
       setErrors({});
       return true;
     }
-    const errs: Record<string, string> = {};
+    const errs: Errors = {};
     res.error.issues.forEach((i) => {
-      const k = String(i.path[0]);
+      const k = String(i.path[0]) as keyof FormState;
       if (!errs[k]) errs[k] = i.message;
     });
     setErrors(errs);
@@ -119,7 +121,8 @@ export function VendorApplicationForm() {
   const scrollTop = () => document.getElementById("apply")?.scrollIntoView({ behavior: "smooth", block: "start" });
 
   const next = () => {
-    if (!validate(stepSchemas[step])) return;
+    const schema = stepSchemas[step];
+    if (schema && !validate(schema)) return;
     setStep((s) => Math.min(s + 1, STEPS.length - 1));
     scrollTop();
   };

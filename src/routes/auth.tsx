@@ -6,11 +6,11 @@ import { Field, TextInput } from "@/components/vendor/fields";
 import { supabase } from "@/integrations/supabase/client";
 import { brandImages } from "@/lib/brand-media";
 
-type Search = { redirect?: string };
+type Search = { redirect?: string | undefined };
 
 export const Route = createFileRoute("/auth")({
   validateSearch: (s: Record<string, unknown>): Search => ({
-    redirect: typeof s.redirect === "string" && s.redirect.startsWith("/") && !s.redirect.startsWith("//") ? s.redirect : undefined,
+    redirect: typeof s["redirect"] === "string" && s["redirect"].startsWith("/") && !s["redirect"].startsWith("//") ? s["redirect"] : undefined,
   }),
   head: () => ({
     meta: [

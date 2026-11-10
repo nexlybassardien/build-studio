@@ -127,10 +127,10 @@ export function Lightbox({
       aria-label="Media viewer"
       className="fixed inset-0 z-[60] flex animate-in fade-in items-center justify-center bg-ink/95 duration-300"
       onClick={onClose}
-      onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
+      onTouchStart={(e) => (touchX.current = e.touches[0]?.clientX ?? null)}
       onTouchEnd={(e) => {
         if (touchX.current === null) return;
-        const dx = e.changedTouches[0].clientX - touchX.current;
+        const dx = (e.changedTouches[0]?.clientX ?? touchX.current) - touchX.current;
         if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
         touchX.current = null;
       }}

@@ -155,9 +155,15 @@ function FaqManager() {
   const [a, setA] = useState("");
 
   const add = async () => {
-    if (!q.trim() || !a.trim()) return toast.error("Add both a question and an answer");
+    if (!q.trim() || !a.trim()) {
+      toast.error("Add both a question and an answer");
+      return;
+    }
     const { error } = await supabase.from("faqs").insert({ question: q.trim(), answer: a.trim(), sort_order: data.length + 1 });
-    if (error) return toast.error("Couldn't add FAQ");
+    if (error) {
+      toast.error("Couldn't add FAQ");
+      return;
+    }
     setQ("");
     setA("");
     toast.success("FAQ added");

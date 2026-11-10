@@ -3,7 +3,7 @@ import { FileText, ImagePlus, Loader2, Upload, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 
-export type UploadedFile = { path: string; name: string; preview?: string; isImage: boolean };
+export type UploadedFile = { path: string; name: string; preview?: string | undefined; isImage: boolean };
 
 const MAX_BYTES = 10 * 1024 * 1024;
 
