@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as ApplicationReceivedRouteImport } from './routes/application-received'
+import { Route as BecomeAVendorRouteImport } from './routes/become-a-vendor'
 import { Route as ExperienceRouteImport } from './routes/experience'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +25,16 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApplicationReceivedRoute = ApplicationReceivedRouteImport.update({
+  id: '/application-received',
+  path: '/application-received',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BecomeAVendorRoute = BecomeAVendorRouteImport.update({
+  id: '/become-a-vendor',
+  path: '/become-a-vendor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExperienceRoute = ExperienceRouteImport.update({
   id: '/experience',
   path: '/experience',
@@ -32,30 +44,54 @@ const ExperienceRoute = ExperienceRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/application-received': typeof ApplicationReceivedRoute
+  '/become-a-vendor': typeof BecomeAVendorRoute
   '/experience': typeof ExperienceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/application-received': typeof ApplicationReceivedRoute
+  '/become-a-vendor': typeof BecomeAVendorRoute
   '/experience': typeof ExperienceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/application-received': typeof ApplicationReceivedRoute
+  '/become-a-vendor': typeof BecomeAVendorRoute
   '/experience': typeof ExperienceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/experience'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/application-received'
+    | '/become-a-vendor'
+    | '/experience'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/experience'
-  id: '__root__' | '/' | '/about' | '/experience'
+  to:
+    | '/'
+    | '/about'
+    | '/application-received'
+    | '/become-a-vendor'
+    | '/experience'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/application-received'
+    | '/become-a-vendor'
+    | '/experience'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ApplicationReceivedRoute: typeof ApplicationReceivedRoute
+  BecomeAVendorRoute: typeof BecomeAVendorRoute
   ExperienceRoute: typeof ExperienceRoute
 }
 
@@ -75,6 +111,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/application-received': {
+      id: '/application-received'
+      path: '/application-received'
+      fullPath: '/application-received'
+      preLoaderRoute: typeof ApplicationReceivedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/become-a-vendor': {
+      id: '/become-a-vendor'
+      path: '/become-a-vendor'
+      fullPath: '/become-a-vendor'
+      preLoaderRoute: typeof BecomeAVendorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/experience': {
       id: '/experience'
       path: '/experience'
@@ -88,6 +138,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ApplicationReceivedRoute: ApplicationReceivedRoute,
+  BecomeAVendorRoute: BecomeAVendorRoute,
   ExperienceRoute: ExperienceRoute,
 }
 export const routeTree = rootRouteImport
