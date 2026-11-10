@@ -13,7 +13,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ApplicationReceivedRouteImport } from './routes/application-received'
 import { Route as BecomeAVendorRouteImport } from './routes/become-a-vendor'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ExperienceRouteImport } from './routes/experience'
+import { Route as PastMarketsRouteImport } from './routes/past-markets'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as TermsRouteImport } from './routes/terms'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -35,9 +39,29 @@ const BecomeAVendorRoute = BecomeAVendorRouteImport.update({
   path: '/become-a-vendor',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExperienceRoute = ExperienceRouteImport.update({
   id: '/experience',
   path: '/experience',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PastMarketsRoute = PastMarketsRouteImport.update({
+  id: '/past-markets',
+  path: '/past-markets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -46,14 +70,22 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/application-received': typeof ApplicationReceivedRoute
   '/become-a-vendor': typeof BecomeAVendorRoute
+  '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
+  '/past-markets': typeof PastMarketsRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/application-received': typeof ApplicationReceivedRoute
   '/become-a-vendor': typeof BecomeAVendorRoute
+  '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
+  '/past-markets': typeof PastMarketsRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -61,7 +93,11 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/application-received': typeof ApplicationReceivedRoute
   '/become-a-vendor': typeof BecomeAVendorRoute
+  '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
+  '/past-markets': typeof PastMarketsRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -70,21 +106,33 @@ export interface FileRouteTypes {
     | '/about'
     | '/application-received'
     | '/become-a-vendor'
+    | '/contact'
     | '/experience'
+    | '/past-markets'
+    | '/privacy'
+    | '/terms'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/application-received'
     | '/become-a-vendor'
+    | '/contact'
     | '/experience'
+    | '/past-markets'
+    | '/privacy'
+    | '/terms'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/application-received'
     | '/become-a-vendor'
+    | '/contact'
     | '/experience'
+    | '/past-markets'
+    | '/privacy'
+    | '/terms'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -92,7 +140,11 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ApplicationReceivedRoute: typeof ApplicationReceivedRoute
   BecomeAVendorRoute: typeof BecomeAVendorRoute
+  ContactRoute: typeof ContactRoute
   ExperienceRoute: typeof ExperienceRoute
+  PastMarketsRoute: typeof PastMarketsRoute
+  PrivacyRoute: typeof PrivacyRoute
+  TermsRoute: typeof TermsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -125,11 +177,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BecomeAVendorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/experience': {
       id: '/experience'
       path: '/experience'
       fullPath: '/experience'
       preLoaderRoute: typeof ExperienceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/past-markets': {
+      id: '/past-markets'
+      path: '/past-markets'
+      fullPath: '/past-markets'
+      preLoaderRoute: typeof PastMarketsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -140,7 +220,11 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ApplicationReceivedRoute: ApplicationReceivedRoute,
   BecomeAVendorRoute: BecomeAVendorRoute,
+  ContactRoute: ContactRoute,
   ExperienceRoute: ExperienceRoute,
+  PastMarketsRoute: PastMarketsRoute,
+  PrivacyRoute: PrivacyRoute,
+  TermsRoute: TermsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
