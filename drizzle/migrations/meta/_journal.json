@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1794319985997,
+      "tag": "0000_faisa_edit_core",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794320009109,
+      "tag": "0001_storage_policies",
+      "breakpoints": true
+    }
+  ]
+}

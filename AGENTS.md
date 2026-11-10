@@ -28,3 +28,10 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Public reads (settings, media, spotlights, FAQs) go through `src/lib/public.functions.ts` with a publishable-key client so pages SSR with data.
+- Public form writes (newsletter, contact, vendor applications) go through `src/lib/forms.functions.ts`, validated with zod schemas in `src/lib/schemas.ts`; tables have no anon insert policy.
+- Admin pages live under `src/routes/_authenticated/admin*` and talk to the database from the browser; RLS with `has_role(auth.uid(),'admin')` is the security boundary.
+- Storage buckets are private (workspace blocks public buckets): gallery media uses long-lived signed URLs stored on the row; vendor uploads use short-lived signed URLs for admins only.
+- The first auth account created is auto-granted admin by a database trigger; later accounts get no role.
