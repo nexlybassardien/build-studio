@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import type { Database } from "@/integrations/supabase/types";
 import { AdminHeader, Panel } from "@/components/admin/AdminUI";
 import { statusStyles } from "@/lib/admin";
 import { APPLICATION_STATUSES, MARKET_STATUSES } from "@/lib/schemas";
@@ -11,10 +12,19 @@ export const Route = createFileRoute("/_authenticated/admin/")({
   component: Overview,
 });
 
-async function count(table: "vendor_applications" | "newsletter_subscribers" | "media_items" | "contact_messages", status?: string) {
-  let q = supabase.from(table).select("id", { count: "exact", head: true });
-  if (status) q = (q as ReturnType<typeof supabase.from<"vendor_applications">>["select"] extends never ? never : typeof q).eq("status" as never, status as never);
-  const { count: c, error } = await q;
+type AppStatus = Database["public"]["Enums"]["application_status"];
+
+async function count(table: "vendor_applications" | "newsletter_subscribers" | "media_items") {
+  const { count: c, error } = await supabase.from(table).select("id", { count: "exact", head: true });
+  if (error) throw error;
+  return c ?? 0;
+}
+
+async function countStatus(status: AppStatus) {
+  const { count: c, error } = await supabase
+    .from("vendor_applications")
+    .select("id", { count: "exact", head: true })
+    .eq("status", status);
   if (error) throw error;
   return c ?? 0;
 }
@@ -25,10 +35,10 @@ function Overview() {
     queryFn: async () => {
       const [total, received, review, approved, waitlisted, subs, media, unread, settings, recent] = await Promise.all([
         count("vendor_applications"),
-        count("vendor_applications", "received"),
-        count("vendor_applications", "under_review"),
-        count("vendor_applications", "approved"),
-        count("vendor_applications", "waitlisted"),
+        countStatus("received"),
+        countStatus("under_review"),
+        countStatus("approved"),
+        countStatus("waitlisted"),
         count("newsletter_subscribers"),
         count("media_items"),
         supabase.from("contact_messages").select("id", { count: "exact", head: true }).eq("is_read", false).then((r) => r.count ?? 0),
