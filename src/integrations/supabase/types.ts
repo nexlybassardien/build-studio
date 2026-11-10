@@ -14,16 +14,351 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string
+          enquiry_type: string
+          id: string
+          is_read: boolean
+          message: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          enquiry_type: string
+          id?: string
+          is_read?: boolean
+          message: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          enquiry_type?: string
+          id?: string
+          is_read?: boolean
+          message?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      faqs: {
+        Row: {
+          answer: string
+          created_at: string
+          id: string
+          question: string
+          sort_order: number
+        }
+        Insert: {
+          answer: string
+          created_at?: string
+          id?: string
+          question: string
+          sort_order?: number
+        }
+        Update: {
+          answer?: string
+          created_at?: string
+          id?: string
+          question?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      media_items: {
+        Row: {
+          caption: string | null
+          category: string | null
+          created_at: string
+          featured: boolean
+          id: string
+          media_type: string
+          poster_url: string | null
+          sort_order: number
+          storage_path: string | null
+          url: string
+        }
+        Insert: {
+          caption?: string | null
+          category?: string | null
+          created_at?: string
+          featured?: boolean
+          id?: string
+          media_type: string
+          poster_url?: string | null
+          sort_order?: number
+          storage_path?: string | null
+          url: string
+        }
+        Update: {
+          caption?: string | null
+          category?: string | null
+          created_at?: string
+          featured?: boolean
+          id?: string
+          media_type?: string
+          poster_url?: string | null
+          sort_order?: number
+          storage_path?: string | null
+          url?: string
+        }
+        Relationships: []
+      }
+      newsletter_subscribers: {
+        Row: {
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          announcement_body: string | null
+          announcement_title: string | null
+          contact_email: string | null
+          event_date: string | null
+          event_name: string | null
+          event_published: boolean
+          event_time: string | null
+          event_venue: string | null
+          id: number
+          instagram_url: string
+          market_status: string
+          newsletter_note: string | null
+          updated_at: string
+          whatsapp: string | null
+        }
+        Insert: {
+          announcement_body?: string | null
+          announcement_title?: string | null
+          contact_email?: string | null
+          event_date?: string | null
+          event_name?: string | null
+          event_published?: boolean
+          event_time?: string | null
+          event_venue?: string | null
+          id?: number
+          instagram_url?: string
+          market_status?: string
+          newsletter_note?: string | null
+          updated_at?: string
+          whatsapp?: string | null
+        }
+        Update: {
+          announcement_body?: string | null
+          announcement_title?: string | null
+          contact_email?: string | null
+          event_date?: string | null
+          event_name?: string | null
+          event_published?: boolean
+          event_time?: string | null
+          event_venue?: string | null
+          id?: number
+          instagram_url?: string
+          market_status?: string
+          newsletter_note?: string | null
+          updated_at?: string
+          whatsapp?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      vendor_applications: {
+        Row: {
+          additional_info: string | null
+          agreed_terms: boolean
+          business_name: string
+          categories: string[]
+          city: string
+          contact_person: string
+          created_at: string
+          description: string
+          document_paths: string[]
+          email: string
+          equipment: string | null
+          id: string
+          instagram: string
+          internal_notes: string | null
+          logo_path: string | null
+          motivation: string
+          needs_electricity: boolean
+          needs_water: boolean
+          other_category: string | null
+          participated_before: boolean
+          phone: string
+          product_paths: string[]
+          reference: string
+          space_type: string
+          special_requirements: string | null
+          special_setup: string | null
+          stall_size: string | null
+          status: Database["public"]["Enums"]["application_status"]
+          uniqueness: string
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          additional_info?: string | null
+          agreed_terms?: boolean
+          business_name: string
+          categories?: string[]
+          city: string
+          contact_person: string
+          created_at?: string
+          description: string
+          document_paths?: string[]
+          email: string
+          equipment?: string | null
+          id?: string
+          instagram: string
+          internal_notes?: string | null
+          logo_path?: string | null
+          motivation: string
+          needs_electricity?: boolean
+          needs_water?: boolean
+          other_category?: string | null
+          participated_before?: boolean
+          phone: string
+          product_paths?: string[]
+          reference?: string
+          space_type: string
+          special_requirements?: string | null
+          special_setup?: string | null
+          stall_size?: string | null
+          status?: Database["public"]["Enums"]["application_status"]
+          uniqueness: string
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          additional_info?: string | null
+          agreed_terms?: boolean
+          business_name?: string
+          categories?: string[]
+          city?: string
+          contact_person?: string
+          created_at?: string
+          description?: string
+          document_paths?: string[]
+          email?: string
+          equipment?: string | null
+          id?: string
+          instagram?: string
+          internal_notes?: string | null
+          logo_path?: string | null
+          motivation?: string
+          needs_electricity?: boolean
+          needs_water?: boolean
+          other_category?: string | null
+          participated_before?: boolean
+          phone?: string
+          product_paths?: string[]
+          reference?: string
+          space_type?: string
+          special_requirements?: string | null
+          special_setup?: string | null
+          stall_size?: string | null
+          status?: Database["public"]["Enums"]["application_status"]
+          uniqueness?: string
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
+      vendor_spotlights: {
+        Row: {
+          brand_name: string
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          instagram: string | null
+          logo_url: string | null
+          published: boolean
+          sort_order: number
+        }
+        Insert: {
+          brand_name: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          instagram?: string | null
+          logo_url?: string | null
+          published?: boolean
+          sort_order?: number
+        }
+        Update: {
+          brand_name?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          instagram?: string | null
+          logo_url?: string | null
+          published?: boolean
+          sort_order?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
+      application_status:
+        | "received"
+        | "under_review"
+        | "approved"
+        | "waitlisted"
+        | "declined"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +485,15 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+      application_status: [
+        "received",
+        "under_review",
+        "approved",
+        "waitlisted",
+        "declined",
+      ],
+    },
   },
 } as const
