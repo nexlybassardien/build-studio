@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, Instagram } from "lucide-react";
+import logo from "@/assets/FaisaEditXlogo.png";
 import { Button } from "@/components/ui/button";
 import { brandImages, INSTAGRAM_URL } from "@/lib/brand-media";
 import { cn } from "@/lib/utils";
@@ -10,6 +11,7 @@ const links = [
   { to: "/about", label: "About" },
   { to: "/experience", label: "The Experience" },
   { to: "/past-markets", label: "Past Markets" },
+  { to: "/vendors", label: "Current Vendors" },
   { to: "/become-a-vendor", label: "Become a Vendor" },
   { to: "/contact", label: "Contact" },
 ] as const;
@@ -45,13 +47,17 @@ export function Nav() {
             scrolled || open ? "glass shadow-float" : "glass-dark",
           )}
         >
-          <Link to="/" className="flex min-w-0 items-center gap-2.5" aria-label="The Faisa Edit home">
+          <Link
+            to="/"
+            className="flex min-w-0 items-center gap-2.5"
+            aria-label="The Faisa Edit home"
+          >
             <img
-              src={brandImages.logo}
+              src={logo}
               alt=""
-              width={40}
-              height={40}
-              className="h-10 w-10 shrink-0 rounded-[0.8rem] shadow-soft"
+              width={48}
+              height={48}
+              className="h-12 w-12 shrink-0 rounded-xl shadow-soft"
             />
             <span
               className={cn(
@@ -93,7 +99,9 @@ export function Nav() {
               aria-expanded={open}
               className={cn(
                 "grid h-10 w-10 place-items-center rounded-full transition-colors lg:hidden",
-                scrolled || open ? "bg-secondary text-foreground" : "bg-ink-foreground/20 text-ink-foreground",
+                scrolled || open
+                  ? "bg-secondary text-foreground"
+                  : "bg-ink-foreground/20 text-ink-foreground",
               )}
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -115,7 +123,10 @@ export function Nav() {
             {links.map((l, i) => (
               <li
                 key={l.to}
-                className={cn("transition-all duration-500 ease-ios", open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0")}
+                className={cn(
+                  "transition-all duration-500 ease-ios",
+                  open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
+                )}
                 style={{ transitionDelay: open ? `${80 + i * 45}ms` : "0ms" }}
               >
                 <Link

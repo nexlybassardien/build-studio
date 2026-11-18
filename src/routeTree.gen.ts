@@ -20,6 +20,7 @@ import { Route as ExperienceRouteImport } from './routes/experience'
 import { Route as PastMarketsRouteImport } from './routes/past-markets'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as VendorsRouteImport } from './routes/vendors'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAdminContentRouteImport } from './routes/_authenticated/admin.content'
@@ -83,6 +84,11 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VendorsRoute = VendorsRouteImport.update({
+  id: '/vendors',
+  path: '/vendors',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -139,6 +145,7 @@ export interface FileRoutesByFullPath {
   '/past-markets': typeof PastMarketsRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/vendors': typeof VendorsRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/inbox': typeof AuthenticatedAdminInboxRoute
@@ -159,6 +166,7 @@ export interface FileRoutesByTo {
   '/past-markets': typeof PastMarketsRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/vendors': typeof VendorsRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/inbox': typeof AuthenticatedAdminInboxRoute
   '/admin/media': typeof AuthenticatedAdminMediaRoute
@@ -180,6 +188,7 @@ export interface FileRoutesById {
   '/past-markets': typeof PastMarketsRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/vendors': typeof VendorsRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/admin/content': typeof AuthenticatedAdminContentRoute
   '/_authenticated/admin/inbox': typeof AuthenticatedAdminInboxRoute
@@ -202,6 +211,7 @@ export interface FileRouteTypes {
     | '/past-markets'
     | '/privacy'
     | '/terms'
+    | '/vendors'
     | '/admin'
     | '/admin/content'
     | '/admin/inbox'
@@ -222,6 +232,7 @@ export interface FileRouteTypes {
     | '/past-markets'
     | '/privacy'
     | '/terms'
+    | '/vendors'
     | '/admin/content'
     | '/admin/inbox'
     | '/admin/media'
@@ -242,6 +253,7 @@ export interface FileRouteTypes {
     | '/past-markets'
     | '/privacy'
     | '/terms'
+    | '/vendors'
     | '/_authenticated/admin'
     | '/_authenticated/admin/content'
     | '/_authenticated/admin/inbox'
@@ -264,6 +276,7 @@ export interface RootRouteChildren {
   PastMarketsRoute: typeof PastMarketsRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
+  VendorsRoute: typeof VendorsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -343,6 +356,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vendors': {
+      id: '/vendors'
+      path: '/vendors'
+      fullPath: '/vendors'
+      preLoaderRoute: typeof VendorsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin': {
@@ -451,6 +471,7 @@ const rootRouteChildren: RootRouteChildren = {
   PastMarketsRoute: PastMarketsRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
+  VendorsRoute: VendorsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram } from "lucide-react";
-import { brandImages, INSTAGRAM_URL } from "@/lib/brand-media";
+import logo from "@/assets/FaisaEditXlogo.png";
+import { INSTAGRAM_URL } from "@/lib/brand-media";
 
 export function Footer() {
   return (
@@ -9,7 +10,7 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-3">
-              <img src={brandImages.logo} alt="" width={52} height={52} className="h-13 w-13 rounded-2xl" loading="lazy" />
+              <img src={logo} alt="" width={52} height={52} className="h-13 w-13 rounded-2xl" loading="lazy" />
               <p className="font-display text-2xl">The Faisa Edit</p>
             </div>
             <p className="mt-5 max-w-sm font-italic-serif text-3xl leading-tight text-ink-foreground/90">
